@@ -5,7 +5,6 @@ import com.task.entities.Users;
 import com.task.service.impl.AuthServiceImpl;
 import com.task.utility.JwtUtil;
 import jakarta.validation.Valid;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +28,6 @@ public class AuthController {
     @PostMapping("/login")
     public String Login(@RequestBody Users users) {
         authService.Login(users);
-        return jwtUtil.generateToken(users.getEmail());
+        return  jwtUtil.generateToken(users.getEmail());
     }
 }

@@ -43,8 +43,6 @@ public class JwtUtil {
         this.publicKey = keyPair.getPublic();
     }
 
-
-
     public String generateToken(String username) {
         Map<String, Object> claims = new HashMap<>();
 

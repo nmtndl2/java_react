@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -42,13 +43,6 @@ public class AuthServiceImpl implements AuthService {
         if (usersRepository.findByEmail(usersDto.getEmail()).isPresent()) {
             throw new UserAlreadyExistsException("User already exists with email: " + usersDto.getEmail());
         }
-//        if (usersRepository.findByEmail(usersDto.getEmail()).isPresent()){
-//            try {
-//                throw new Exception("User already exists!");
-//            } catch (Exception e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
 
         Users users = new Users();
         users.setEmail(usersDto.getEmail());
@@ -58,6 +52,11 @@ public class AuthServiceImpl implements AuthService {
                 .map(roleName -> roleRepository.findByRole("ROLE_" + roleName)
                         .orElseThrow(() -> new RuntimeException("Role not found: " + roleName)))
                 .collect(Collectors.toSet());
+
+//        Set<Role> roles = new HashSet<>();
+//        Role defaultRole = roleRepository.findByRole("ROLE_USER")
+//                .orElseThrow(() -> new RuntimeException("Default role ROLE_USER not found"));
+//        roles.add(defaultRole);
 
         users.setRoles(roles);
 
