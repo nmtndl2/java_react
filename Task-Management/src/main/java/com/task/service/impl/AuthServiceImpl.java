@@ -57,7 +57,6 @@ public class AuthServiceImpl implements AuthService {
 //        Role defaultRole = roleRepository.findByRole("ROLE_USER")
 //                .orElseThrow(() -> new RuntimeException("Default role ROLE_USER not found"));
 //        roles.add(defaultRole);
-
         users.setRoles(roles);
 
         return usersRepository.save(users);
